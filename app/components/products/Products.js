@@ -1,4 +1,7 @@
 import { React } from "react";
+import "./Products.css";
+import Product from "./Product";
+import ProductDetailsModal from "./ProductDetailsModal";
 
 async function getData() {
   const res = await fetch("https://fakestoreapi.com/products");
@@ -13,12 +16,12 @@ const Products = async () => {
   const products = await getData();
 
   return (
-    <div>
-      {products.map((product) => (
-        <p className="text-primary" key={product.id}>
-          {product.title}
-        </p>
-      ))}
+    <div className="products-main-container">
+      <div className="products-container">
+        {products.map((product) => (
+          <Product key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 };
