@@ -18,24 +18,36 @@ const Products = () => {
   const [categories, setCategories] = useState([]);
   const [demoCategories, setDemoCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     (async function fetchData() {
-      const productsData = await getData();
-      setProducts(productsData);
+      try {
+        const productsData = await getData();
+        setProducts(productsData);
 
-      // Extract unique categories from products
-      const uniqueCategories = Array.from(
-        new Set(productsData.map((product) => product.category))
-      );
-      setCategories(uniqueCategories);
-      setDemoCategories(uniqueCategories.slice(0, 2));
+        // Extract unique categories from products
+        const uniqueCategories = Array.from(
+          new Set(productsData.map((product) => product.category))
+        );
+        setCategories(uniqueCategories);
+        setDemoCategories(uniqueCategories.slice(0, 2));
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
     })();
   }, []);
-  console.log(categories);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
   };
 
   const filteredProducts =
@@ -43,8 +55,20 @@ const Products = () => {
       ? products
       : products.filter((product) => product.category === selectedCategory);
 
+  const searchedProducts = filteredProducts.filter((product) =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
     <div className="products-main-container">
+      <form class="search-bar" onSubmit={handleSearchSubmit}>
+        <input
+          class="search-bar"
+          type="search"
+          placeholder="Search Products..."
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+      </form>
       <div className="category-filter mt-4">
         <div className="category-buttons">
           <button
@@ -76,7 +100,7 @@ const Products = () => {
             className="more-category-btn"
             type="button"
             data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasRight"
+            data-bs-target="#categoryoffcanvasRight"
             aria-controls="offcanvasRight"
           >
             <svg
@@ -99,9 +123,13 @@ const Products = () => {
         </div>
       </div>
       <div className="products-container">
-        {filteredProducts.map((product) => (
-          <Product key={product.id} product={product} />
-        ))}
+        {searchedProducts.length > 0 ? (
+          searchedProducts.map((product) => (
+            <Product key={product.id} product={product} />
+          ))
+        ) : (
+          <p className="text-danger text-center">No products found</p>
+        )}
       </div>
     </div>
   );

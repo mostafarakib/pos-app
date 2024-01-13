@@ -10,7 +10,7 @@ function CategoriesSidebar({
     <div
       class="offcanvas offcanvas-end"
       tabindex="-1"
-      id="offcanvasRight"
+      id="categoryoffcanvasRight"
       aria-labelledby="offcanvasRightLabel"
     >
       <div class="offcanvas-header justify-content-end">
