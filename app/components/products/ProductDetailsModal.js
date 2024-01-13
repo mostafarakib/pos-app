@@ -7,7 +7,7 @@ function ProductDetailsModal({ product, id }) {
     <div
       className="modal fade text-black"
       id={`productDetailsModal-${id}`}
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >

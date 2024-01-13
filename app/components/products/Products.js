@@ -1,7 +1,8 @@
-import { React } from "react";
+"use client";
+import { React, useEffect, useState } from "react";
 import "./Products.css";
 import Product from "./Product";
-import ProductDetailsModal from "./ProductDetailsModal";
+import CategoriesSidebar from "./CategoriesSidebar";
 
 async function getData() {
   const res = await fetch("https://fakestoreapi.com/products");
@@ -12,13 +13,93 @@ async function getData() {
   return res.json();
 }
 
-const Products = async () => {
-  const products = await getData();
+const Products = () => {
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [demoCategories, setDemoCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  useEffect(() => {
+    (async function fetchData() {
+      const productsData = await getData();
+      setProducts(productsData);
+
+      // Extract unique categories from products
+      const uniqueCategories = Array.from(
+        new Set(productsData.map((product) => product.category))
+      );
+      setCategories(uniqueCategories);
+      setDemoCategories(uniqueCategories.slice(0, 2));
+    })();
+  }, []);
+  console.log(categories);
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredProducts =
+    selectedCategory === "all"
+      ? products
+      : products.filter((product) => product.category === selectedCategory);
 
   return (
     <div className="products-main-container">
+      <div className="category-filter mt-4">
+        <div className="category-buttons">
+          <button
+            className={
+              selectedCategory === "all"
+                ? "category-btn selected-category"
+                : "category-btn"
+            }
+            onClick={() => handleCategoryChange("all")}
+          >
+            All Categories
+          </button>
+          <div className="category-buttons-container">
+            {demoCategories.map((category, index) => (
+              <button
+                key={index}
+                className={
+                  selectedCategory === category
+                    ? "category-btn selected-category"
+                    : "category-btn"
+                }
+                onClick={() => handleCategoryChange(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+          <button
+            className="more-category-btn"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight"
+            aria-controls="offcanvasRight"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24"
+              width="6"
+              viewBox="0 0 128 512"
+            >
+              <path
+                fill="#637381"
+                d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"
+              />
+            </svg>
+          </button>
+          <CategoriesSidebar
+            categories={categories}
+            handleCategoryChange={handleCategoryChange}
+            selectedCategory={selectedCategory}
+          />
+        </div>
+      </div>
       <div className="products-container">
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <Product key={product.id} product={product} />
         ))}
       </div>
