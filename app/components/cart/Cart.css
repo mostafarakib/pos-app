@@ -1,0 +1,56 @@
+.cart-container {
+  padding: 0.5rem;
+}
+.cart-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+.hamburger-icon > div {
+  width: 25px;
+  height: 2px;
+  background-color: black;
+  margin: 5px 0;
+}
+.cart-topbar > button svg {
+  margin-top: -4px;
+  margin-right: 4px;
+}
+
+.cart-customer-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #7985cf;
+  background-color: #e7e9f6;
+  padding: 0.8rem 1rem;
+  margin-top: 1rem;
+  font-weight: 500;
+  border-radius: 3px;
+}
+
+.cart-added-items {
+  padding: 1rem 0;
+}
+
+.cart-added-item {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+.cart-added-item-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #637381;
+  border-radius: 2px;
+  padding: 0.5rem 0.5rem;
+  flex: 1;
+}
+.cart-added-item-info input {
+  text-align: center;
+  border: none;
+  width: 2.5rem;
+  color: #637381;
+}
