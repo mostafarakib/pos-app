@@ -1,8 +1,14 @@
 import React from "react";
 import "./Products.css";
 import Image from "next/image";
+import { useCart } from "@/app/context/CartContext";
 
 function ProductDetailsModal({ product, id }) {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart({ ...product });
+  };
   return (
     <div
       className="modal fade text-black"
@@ -34,7 +40,9 @@ function ProductDetailsModal({ product, id }) {
               <h6>{product.title}</h6>
               <p>{product.description}</p>
               <h6 className="mt-2">${product.price}</h6>
-              <button className="btn-main w-100 mt-2">Add to Cart</button>
+              <button className="btn-main w-100 mt-2" onClick={handleAddToCart}>
+                Add to Cart
+              </button>
             </div>
           </div>
         </div>

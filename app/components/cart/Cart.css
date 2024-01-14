@@ -30,9 +30,9 @@
   border-radius: 3px;
 }
 
-.cart-added-items {
+/* .cart-added-items {
   padding: 1rem 0;
-}
+} */
 
 .cart-added-item {
   display: flex;
@@ -53,4 +53,8 @@
   border: none;
   width: 2.5rem;
   color: #637381;
+}
+
+.cart-added-item svg {
+  cursor: pointer;
 }
