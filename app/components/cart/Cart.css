@@ -5,7 +5,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 0.5rem;
+  padding: 0.5rem;
+  flex-wrap: wrap;
 }
 .hamburger-icon > div {
   width: 25px;
@@ -16,6 +17,9 @@
 .cart-topbar > button svg {
   margin-top: -4px;
   margin-right: 4px;
+}
+.cart-topbar > button {
+  margin-bottom: 0.5rem;
 }
 
 .cart-customer-info {
@@ -29,10 +33,6 @@
   font-weight: 500;
   border-radius: 3px;
 }
-
-/* .cart-added-items {
-  padding: 1rem 0;
-} */
 
 .cart-added-item {
   display: flex;
@@ -57,4 +57,53 @@
 
 .cart-added-item svg {
   cursor: pointer;
+}
+
+.cart-total-price-container {
+  margin-top: 2rem;
+  width: 50%;
+}
+
+.cart-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.cart-action-buttons div {
+  margin-right: 0.5rem;
+}
+.cart-toggle-button {
+  background-color: #e7e9f6;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+}
+
+.cart-container .offcanvas {
+  width: 80%;
+}
+
+/* responsive styles */
+@media (max-width: 992px) {
+  .cart-toggle-button {
+    display: flex;
+  }
+  .cart-container {
+    padding: 0;
+  }
+  .cart-total-price-container {
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .cart-total-price-container {
+    width: 75%;
+  }
 }

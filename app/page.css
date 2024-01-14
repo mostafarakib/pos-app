@@ -4,3 +4,9 @@
 
   color: #637381;
 }
+
+@media (max-width: 992px) {
+  .main {
+    display: block;
+  }
+}

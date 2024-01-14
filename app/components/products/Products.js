@@ -74,8 +74,8 @@ const Products = () => {
           <button
             className={
               selectedCategory === "all"
-                ? "category-btn selected-category"
-                : "category-btn"
+                ? "category-btn selected-category category-btn-all"
+                : "category-btn category-btn-all"
             }
             onClick={() => handleCategoryChange("all")}
           >
