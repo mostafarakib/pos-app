@@ -60,9 +60,9 @@ const Products = () => {
   );
   return (
     <div className="products-main-container">
-      <form class="search-bar" onSubmit={handleSearchSubmit}>
+      <form className="search-bar" onSubmit={handleSearchSubmit}>
         <input
-          class="search-bar"
+          className="search-bar"
           type="search"
           placeholder="Search Products..."
           value={searchTerm}

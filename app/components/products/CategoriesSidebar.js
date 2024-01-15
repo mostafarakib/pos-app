@@ -8,20 +8,20 @@ function CategoriesSidebar({
 }) {
   return (
     <div
-      class="offcanvas offcanvas-end"
-      tabindex="-1"
+      className="offcanvas offcanvas-end"
+      tabIndex="-1"
       id="categoryoffcanvasRight"
       aria-labelledby="offcanvasRightLabel"
     >
-      <div class="offcanvas-header justify-content-end">
+      <div className="offcanvas-header justify-content-end">
         <button
           type="button"
-          class="btn-close text-reset"
+          className="btn-close text-reset"
           data-bs-dismiss="offcanvas"
           aria-label="Close"
         ></button>
       </div>
-      <div class="offcanvas-body py-0">
+      <div className="offcanvas-body py-0">
         <h5 className="text-center mb-3">Categories</h5>
         <div className="category-buttons">
           <button

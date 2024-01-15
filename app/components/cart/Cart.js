@@ -4,7 +4,7 @@ import "./Cart.css";
 import { useCart } from "@/app/context/CartContext";
 
 const Cart = () => {
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 992);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const {
     state,
     removeFromCart,
@@ -33,6 +33,9 @@ const Cart = () => {
   const total = tax + shipping + discount + subtotal;
 
   useEffect(() => {
+    // Set the initial value based on the current window size
+    setIsSmallScreen(window.innerWidth < 992);
+
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth < 992);
     };
@@ -49,7 +52,7 @@ const Cart = () => {
     <div className="cart-container">
       <div
         className={` ${isSmallScreen ? "offcanvas offcanvas-end" : ""}`}
-        tabindex="-1"
+        tabIndex="-1"
         id="cartoffcanvasRight"
         aria-labelledby="offcanvasRightLabel"
       >
